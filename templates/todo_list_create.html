@@ -44,7 +44,7 @@
     <b>todo items below:</b><br>
     {% for form in item_form %}
     <div class="item">
-        {{form.id}}
+        <p>{{form.id}}</p>
         <p>{{form.name.label_tag}}</p>
         <p>{{form.name}}</p>
         <p>{{form.name.errors}}</p>
@@ -89,7 +89,7 @@ $(document).ready(function () {
             // Go through the forms and set their indices, names and IDs
             for (formCount = forms.length; i < formCount; i++) {
                 $(forms.get(i)).children().children().each(function () {
-                    if ($(this).attr('type') == 'text') updateElementIndex(this, prefix, i);
+                    if ($(this).get(0).tagName == 'INPUT' ) updateElementIndex(this, prefix, i);
                 });
             }
         } // End if
