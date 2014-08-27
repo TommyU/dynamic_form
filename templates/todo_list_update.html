@@ -45,7 +45,7 @@
     {% for form in item_form %}
     <div class="item">
         <p>{{form.id}}</p>
-        <p style="display:none">{{form.DELETE}}</p>
+        <p class="delete_mark" style="display:none">{{form.DELETE}}</p>
         <p>{{form.name.label_tag}}</p>
         <p>{{form.name}}</p>
         <p>{{form.name.errors}}</p>
@@ -79,24 +79,8 @@ $(document).ready(function () {
     }
 
     function deleteForm(btn, prefix) {
-        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-        if (formCount > 1) {
-            // Delete the item/form
-            $(btn).parents('.item').remove();
-            var forms = $('.item'); // Get all the forms
-            // Update the total number of forms (1 less than before)
-            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-            var i = 0;
-            // Go through the forms and set their indices, names and IDs
-            for (formCount = forms.length; i < formCount; i++) {
-                $(forms.get(i)).children().children().each(function () {
-                    if ($(this).get(0).tagName == 'INPUT' ) updateElementIndex(this, prefix, i);
-                });
-            }
-        } // End if
-        else {
-            alert("You have to enter at least one todo item!");
-        }
+        $(".delete_mark",$(btn).parent().parent()).children().attr("checked","checked")
+        $(btn).parents('.item').hide();
         return false;
     }
 

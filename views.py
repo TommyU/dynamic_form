@@ -14,7 +14,7 @@ class todo_listListView(ListView):
 
 class todo_listUpdateView(UpdateView):
     model = todo_list
-    template_name = 'todo_list_create.html'
+    template_name = 'todo_list_update.html'
     success_url = '/todolist/'
     form_class = todo_listForm
 
@@ -35,8 +35,6 @@ class todo_listUpdateView(UpdateView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data())
-
-
 
 class todo_listCreateView(CreateView):
     model = todo_list
