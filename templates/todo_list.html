@@ -25,14 +25,18 @@
         max-width:120px;
         text-align:center;
         width:auto;
+        float:left;
         }
     </style>
 </head>
 <body>
 <a href="/todolist/create" class="button" target="_self">Create</a>
+<br><br>
 <hr>
 {% for obj in object_list %}
-     <li>{{obj.id}}.<a href="/todolist/{{obj.id}}" target="_self"> {{obj.name}}</a></li>
+     <li style="clear:left; display:block; float:left;"><span style="display:block; float:left">{{obj.id}}. {{obj.name}}</span>
+         <a href="/todolist/{{obj.id}}" class="button" target="_self">view&nbsp; </a>
+         <a href="/todolist/update/{{obj.id}}"  class="button" target="_self">&nbsp;update&nbsp; </a></li>
 {% endfor %}
 </body>
 </html>

@@ -12,6 +12,32 @@ class todo_listListView(ListView):
     model = todo_list
     template_name = 'todo_list.html'
 
+class todo_listUpdateView(UpdateView):
+    model = todo_list
+    template_name = 'todo_list_create.html'
+    success_url = '/todolist/'
+    form_class = todo_listForm
+
+    def get_context_data(self, **kwargs):
+        context = super(todo_listUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context.update(item_form = todo_itemSet(self.request.POST))
+        else:
+            context.update(item_form = todo_itemSet(instance =todo_list.objects.get(pk = self.kwargs.get('pk',False))))
+        return  context
+
+    def form_valid(self, form):
+        iter_form = todo_itemSet(self.request.POST,instance=self.object)
+        if iter_form.is_valid():
+            self.object = form.save()
+            iter_form.instance = self.object
+            iter_form.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data())
+
+
+
 class todo_listCreateView(CreateView):
     model = todo_list
     template_name = 'todo_list_create.html'

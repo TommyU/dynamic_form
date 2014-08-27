@@ -44,6 +44,7 @@
     <b>todo items below:</b><br>
     {% for form in item_form %}
     <div class="item">
+        {{form.id}}
         <p>{{form.name.label_tag}}</p>
         <p>{{form.name}}</p>
         <p>{{form.name.errors}}</p>
